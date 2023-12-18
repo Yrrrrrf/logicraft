@@ -1,0 +1,30 @@
+[package]
+name = "tester"
+version = "0.1.0"
+edition = "2021"
+authors = ["Yrrrrrf <fernandorezacampos@gmail.com>"]
+description = "Tester for logicraft"
+repository = "https://github.com/Yrrrrrf/logicraft"
+
+
+[[bin]]
+name = "tester"
+path = "src/quick_dev.rs"
+
+# [[bin]]
+# name = "db_tester"
+# path = "src/db_tester.rs"
+
+# [[bin]]
+# name = "httpc_tester"
+# path = "src/httpc_tester.rs"
+
+
+[dependencies]
+dev_utils = "0.0.11"
+# tokio is used to run async code
+tokio = { version = "1.*", features = ["full"] }  # (https://docs.rs/tokio/latest/tokio/)
+# anyhow is used to handle errors
+anyhow = "1.*"  # (https://docs.rs/anyhow/latest/anyhow/)
+# httpc is used to make HTTP requests
+httpc-test = "0.*"  # (https://docs.rs/httpc-test/latest/httpc_test/)

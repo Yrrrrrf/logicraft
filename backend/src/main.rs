@@ -26,14 +26,14 @@ mod errors;
 mod test_routes;
 /// Re-export the `config` function from the `config` module.
 /// This allows the `config` function to be used as `config::config()` instead of `config::config::config()`.
-pub use config::config;
+// pub use config::config;
 use test_routes::test_routes;
 
 // ? Main ------------------------------------------------------------------------------------
 #[tokio::main]
 // The `Box<dyn std::error::Error>` return type allows the function to return any error type.
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    print_app_data(file!());  // Print application data such as version and build info.
+    // print_app_data(file!());  // Print application data such as version and build info.
     
     tracing_subscriber::fmt()  // Format the output of the tracing subscriber.
         .without_time()  // Do not include the time in the output.
@@ -43,8 +43,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // * Code...
     let app = Router::new()
-        .route("/home", get("Hello Wolrd!"))
+        .route("/home", get(Html("Hello World!")))
         .merge(test_routes::test_routes())
+
+        // * Static file server ---------------------------------------------------------------
+        .nest_service("/", ServeDir::new("./../frontend/build/index.html"))
     ;
 
     let port: u32 = 8080;
@@ -54,3 +57,5 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())  // Return `Ok` to indicate that the program ran successfully.
 }
+
+// good check character: ✓

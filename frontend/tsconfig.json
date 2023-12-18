@@ -1,0 +1,19 @@
+{
+	"extends": "./.svelte-kit/tsconfig.json", // Inherits settings from Svelte's default TypeScript configuration. This helps maintain consistency with Svelte's recommended settings.
+	"compilerOptions": {
+		"outDir": "build",// Specifies the output directory for the compiled JavaScript files. This is where TypeScript will place the files it compiles from your TypeScript sources.
+		"allowJs": true,  // Allows JavaScript files to be included in your TypeScript project. This is useful if you're migrating a JavaScript project to TypeScript incrementally.
+		"checkJs": true,  // Enables type-checking of JavaScript files. This can help catch errors in .js files when using TypeScript in your project.
+		"esModuleInterop": true,  // Allows for a more interoperable, standards-compliant handling of module imports and exports.
+		"forceConsistentCasingInFileNames": true,  // Ensures that the casing of referenced file names is consistent. This is particularly important in environments where file name casing can lead to issues (like on case-sensitive file systems).
+		"resolveJsonModule": true,  // Allows for importing of .json files. This can be useful if your project needs to include JSON data files.
+		"skipLibCheck": true,  // Skips type checking of declaration files (`.d.ts`). This can speed up the compilation if you trust the types provided by your dependencies.
+		"sourceMap": true,  // Generates source map files. These are useful for debugging, as they map the compiled code back to the original TypeScript code.
+		"strict": true,  // Enables all strict type-checking options, leading to more rigorous checks and potentially uncovering more issues or inaccuracies in type definitions.
+		// "module": "es2015", // Specifies the module code generation method. ES2015 is a standard for structuring JavaScript code in modules, which helps with things like tree-shaking in bundlers.
+		"moduleResolution": "bundler" // This tells TypeScript how to resolve modules. Setting it to "bundler" indicates that module resolution is handled by a bundler (like Webpack or Rollup).
+	},
+	// The comments below explain how to handle path aliases and the inclusion or exclusion of files from the TypeScript compilation process. It's noted that TypeScript doesn't merge includes/excludes from extended tsconfig files, so you should copy them over if needed.
+	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes from the referenced tsconfig.json - TypeScript does not merge them in
+}

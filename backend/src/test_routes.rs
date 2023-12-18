@@ -13,8 +13,10 @@ use tower_http::services::ServeDir;
 /// - "/test_path/:a/:b" which responds to GET requests and expects path parameters.
 pub fn test_routes() -> Router {
     Router::new()
+        //* route means that the service is mounted at the given path
         .route("/test_query", get(test_query))
         .route("/test_path/:a/:b", get(test_path))
+        //* a fallback service is a service that is called if no other service matches the request
         .fallback_service(static_routes())
 }
 
