@@ -7,21 +7,22 @@ description = "Tester for logicraft"
 repository = "https://github.com/Yrrrrrf/logicraft"
 
 
-[[bin]]
-name = "tester"
-path = "src/quick_dev.rs"
+[[bin]]  # cargo run -p tester --bin routes
+name = "routes"
+path = "src/route_tester.rs"
 
-# [[bin]]
-# name = "db_tester"
-# path = "src/db_tester.rs"
+[[bin]]  # cargo run -p tester --bin db
+name = "db"
+path = "src/db_tester.rs"
 
-# [[bin]]
-# name = "httpc_tester"
-# path = "src/httpc_tester.rs"
+# [[bin]]  # cargo run -p tester --bin transact
+# name = "transact"
+# path = "src/transact_tester.rs"
 
 
 [dependencies]
 dev_utils = "0.0.11"
+log = "0.4.*"  # (https://docs.rs/log/latest/log/)
 # tokio is used to run async code
 tokio = { version = "1.*", features = ["full"] }  # (https://docs.rs/tokio/latest/tokio/)
 # anyhow is used to handle errors

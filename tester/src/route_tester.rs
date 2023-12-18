@@ -4,7 +4,6 @@ use anyhow::Result;
 
 use dev_utils::{
     print_app_data, // Utility function to print application data.
-    // log::rlog::RLog, // Custom logging utility.
 };
 
 /// The main function of the application.

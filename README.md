@@ -19,6 +19,40 @@ This project is a full-stack web application built with Rust and Svelte. The bac
 - Karnaugh Map Visualization
 - [Add more features here...]
 
+## Setup
+### Prerequisites
+
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Node.js](https://nodejs.org/en/download/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+<!-- - [Docker](https://docs.docker.com/get-docker/)  -->
+
+### Installation
+- Install the dependencies.
+```bash
+cargo build
+```
+- Create a `.env` file in the root directory and add the following environment variables.
+```bash
+DATABASE_URL=postgres://<username>:<password>@localhost/logicraft
+```
+<!--
+- Create the database.
+```bash
+cargo sqlx database create
+``` 
+-->
+- [Build](./frontend/README.md) the frontend.
+```bash
+cd frontend  # Change directory to frontend.
+npm install  # Install dependencies for the frontend.
+npm run build  # Build the frontend static files.
+```
+- Run the application.
+```bash
+cargo run  # check http://127.0.0.1:8080
+```
+
 ## Roadmap
 - [ ] Initial project setup and directory structure.
 - [ ] Frontend development (HTML5, CSS, JavaScript).
@@ -27,7 +61,7 @@ This project is a full-stack web application built with Rust and Svelte. The bac
 - [ ] Implementing user authentication and session management.
 - [ ] Developing advanced features (sharing, collaboration tools, etc.).
 - [ ] Testing, debugging, and deployment.
-- [ ] Gathering feedback and iterative improvement.
+- [ ] Gathering feedback and iterative improvement. 
 
 ## Directory Structure
 ```bash
@@ -40,24 +74,36 @@ LogiCraft/
 ├── assets/  # Holds static files like fonts, icons, and images.
 │   └── attributions.md  # Attributions for all assets.
 ├── sql/  # Contains SQL scripts used for database setup.
-├── src/  # Main Rust source code directory.
-│   ├── api/  # API handlers and middleware.
-│   ├── core/  # Core functionality.
-│   ├── models/  # Data models.
-│   ├── services/  # Service layer handling business logic.
-│   ├── state/  # State management code.
-│   └── main.rs  # Application entry point.
-├── web/  # Frontend directory.
-│   ├── package.json  # Node.js dependencies and scripts.
-│   ├── public/  # Static files served by the web server.
-│   └── src/  # Frontend application source code.
-└── tests/  # Test files for the application.
+├── backend/  # Contains the backend source code.
+│   ├── src/  # Contains the source code.
+│   │   ├── api/  # Contains the API endpoints.
+│   │   ├── models/  # Contains the database models.
+│   │   ├── routes/  # Contains the routes.
+│   │   ├── services/  # Contains the services (business logic).
+│   │   ├── main.rs  # The entry point of the application.
+│   │   └── *.rs  # Other Rust files to handle the application logic.
+├── frontend/  # Contains the frontend source code.
+│   ├── src/  # Contains the source code.
+│   ├── static/ # Contains static files like fonts, icons, and images.
+│   └── *.* # Other files to handle the frontend logic.
+└── tester/  # Test files for the application.
 ```
+<!--
+
+backend/src/
+│   │   ├── auth/  # Contains the authentication logic.
+│   │   ├── db/  # Contains the database connection logic.
+
+tester/
+    ├── backend/  # Contains the backend tests.
+    │   └── *.rs  # Rust test files.
+    └── frontend/  # Contains the frontend tests.
+        └── *.js  # JavaScript test files.
+
+-->
 
 ## Attributions
-
 This project use some resources from many sources. The index of attributions is in [attributions.md](assets/attributions.md) file.
 
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

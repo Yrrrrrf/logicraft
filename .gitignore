@@ -15,4 +15,4 @@ Cargo.lock
 .vscode/
 
 # project specific files
-log.md
+psf/
