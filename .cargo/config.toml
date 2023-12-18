@@ -1,0 +1,8 @@
+# Cargo config file
+# See https://doc.rust-lang.org/cargo/reference/config.html
+
+
+[env]
+# The default target to build for when no target is given.
+# This is used when running cargo build, cargo run, cargo test, cargo bench, cargo package, cargo publish, and cargo install.
+SERVICE_WEB_FOLDER = "web/public"
