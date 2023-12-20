@@ -17,12 +17,13 @@ use axum::{
 };
 use tower_http::services::ServeDir;
 use tracing::{Level, info};
-use tracing_subscriber::{EnvFilter, fmt::format};
-use tokio::fs;
 
 //* Internal module imports
 mod config;
-mod errors;
+mod error;
+mod web;
+
+// Test related imports
 mod test_routes;
 /// Re-export the `config` function from the `config` module.
 /// This allows the `config` function to be used as `config::config()` instead of `config::config::config()`.
@@ -33,7 +34,7 @@ use test_routes::test_routes;
 #[tokio::main]
 // The `Box<dyn std::error::Error>` return type allows the function to return any error type.
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // print_app_data(file!());  // Print application data such as version and build info.
+    print_app_data(file!());  // Print application data such as version and build info.
     
     tracing_subscriber::fmt()  // Format the output of the tracing subscriber.
         .without_time()  // Do not include the time in the output.
@@ -45,6 +46,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = Router::new()
         .route("/home", get(Html("Hello World!")))
         .merge(test_routes::test_routes())
+        .merge(web::routes_login::routes())
 
         // * Static file server ---------------------------------------------------------------
         .nest_service("/", ServeDir::new("./../frontend/build/index.html"))

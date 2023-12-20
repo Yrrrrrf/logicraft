@@ -1,7 +1,7 @@
 use std::env::var;
 use std::sync::OnceLock;
 
-use crate::errors::Error;
+use crate::error::AppError;
 
 /// This function returns a reference to a singleton instance of `Config`. It means that the same instance is returned on all calls.
 /// The `Config` instance is created the first time this function is called, and the same instance is returned on all subsequent calls.
@@ -27,7 +27,7 @@ pub struct Config {
 impl Config {
     /// This function attempts to load the configuration from environment variables.
     /// It returns a `Result` that is `Ok` if the environment variables could be loaded, and `Err` otherwise.
-    fn load_from_env() -> Result<Config, Error> {
+    fn load_from_env() -> Result<Config, AppError> {
         Ok(Config {
             // Web
             web_folder: get_env("SERVICE_WEB_FOLDER")?,
@@ -41,6 +41,6 @@ impl Config {
 
 /// This function attempts to get the value of an environment variable.
 /// It returns a `Result` that is `Ok` if the environment variable exists, and `Err` otherwise.
-fn get_env(key: &'static str) -> Result<String, Error> {
-    var(key).map_err(|_| Error::EnvVarNotFound(key))
+fn get_env(key: &'static str) -> Result<String, AppError> {
+    var(key).map_err(|_| AppError::EnvVarNotFound(key))
 }

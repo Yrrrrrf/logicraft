@@ -2,7 +2,7 @@
 
 members = [  # cargo run -p <member>
     "backend",  # cargo run -p backend
-    "tester",  # cargo run -p tester
+    "tester",  # cargo run -p tester --bin <test_name>
 ]
 
 default-members = [  # cargo run

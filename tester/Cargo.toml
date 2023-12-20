@@ -9,7 +9,7 @@ repository = "https://github.com/Yrrrrrf/logicraft"
 
 [[bin]]  # cargo run -p tester --bin routes
 name = "routes"
-path = "src/route_tester.rs"
+path = "src/test_routes.rs"
 
 [[bin]]  # cargo run -p tester --bin db
 name = "db"
@@ -29,3 +29,4 @@ tokio = { version = "1.*", features = ["full"] }  # (https://docs.rs/tokio/lates
 anyhow = "1.*"  # (https://docs.rs/anyhow/latest/anyhow/)
 # httpc is used to make HTTP requests
 httpc-test = "0.*"  # (https://docs.rs/httpc-test/latest/httpc_test/)
+serde_json = "1.*"  # (https://docs.rs/serde_json/latest/serde_json/)
