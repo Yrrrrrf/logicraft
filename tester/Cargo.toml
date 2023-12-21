@@ -15,9 +15,10 @@ path = "src/test_routes.rs"
 name = "db"
 path = "src/db_tester.rs"
 
-# [[bin]]  # cargo run -p tester --bin transact
-# name = "transact"
-# path = "src/transact_tester.rs"
+[[bin]]  # cargo run -p tester --bin hash_password
+name = "password"
+path = "src/hash_password.rs"
+
 
 
 [dependencies]
@@ -30,3 +31,5 @@ anyhow = "1.*"  # (https://docs.rs/anyhow/latest/anyhow/)
 # httpc is used to make HTTP requests
 httpc-test = "0.*"  # (https://docs.rs/httpc-test/latest/httpc_test/)
 serde_json = "1.*"  # (https://docs.rs/serde_json/latest/serde_json/)
+bcrypt = "0.*"  # (https://docs.rs/bcrypt/latest/bcrypt/)
+tower-cookies = "0.*"  # (https://docs.rs/toker-cookies/latest/toker_cookies/)

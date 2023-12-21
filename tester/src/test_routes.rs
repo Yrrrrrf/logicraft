@@ -32,18 +32,19 @@ async fn main() -> Result<()> {
 
     // //* Test static routes.
     // // A static route is a route that serves static files from a directory.
-    // hc.do_get("/src/main.rs").await?.print().await?;
     // hc.do_get("/assets/icons/data-server.png").await?.print().await?;
+    hc.do_get("/assets/attributions.md").await?.print().await?;
+    // hc.do_get("/backend/src/main.rs").await?.print().await?;
 
 
-    hc.do_post(
-        "/api/login", 
-        json!({
-            "username": "admin",
-            "password": "etesech",
-            // "password": "admin",
-        })
-    ).await?.print().await?;
+    // hc.do_post(
+    //     "/api/login", 
+    //     json!({
+    //         "username": "admin",
+    //         "password": "etesech",
+    //         // "password": "admin",
+    //     })
+    // ).await?.print().await?;
 
 
 

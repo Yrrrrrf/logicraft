@@ -13,8 +13,9 @@ use dev_utils::{
 use axum::{
     routing::{get, post},
     Router,
-    response::Html,
+    response::{Html, Response}, middleware,
 };
+use tower_cookies::CookieManagerLayer;
 use tower_http::services::ServeDir;
 use tracing::{Level, info};
 
@@ -39,17 +40,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing_subscriber::fmt()  // Format the output of the tracing subscriber.
         .without_time()  // Do not include the time in the output.
         .with_target(false)  // Do not include the target in the output.
-        .with_max_level(Level::INFO)  // Set the maximum log level to INFO.
+        // .with_max_level(Level::INFO)  // Set the maximum log level to INFO.
+        .with_max_level(Level::TRACE)  // Set the maximum log level to INFO.
         .init();  // Initialize the tracing subscriber.
 
     // * Code...
     let app = Router::new()
-        .route("/home", get(Html("Hello World!")))
+        .route("/hello_world", get(Html("Hello World!")))
         .merge(test_routes::test_routes())
         .merge(web::routes_login::routes())
-
+        // .layer(middleware::map_response(main_response_mapper))
+        // .layer(CookieManagerLayer::new())
         // * Static file server ---------------------------------------------------------------
-        .nest_service("/", ServeDir::new("./../frontend/build/index.html"))
+        // to see the static files, run `npm run build` in the frontend directory
+        // .nest_service("/", ServeDir::new("./frontend/build/index.html"))
+        .nest_service("/", ServeDir::new("./"))
+        // to check the static files on the server use 127.0.0.1:8080/frontend/build/index.html
     ;
 
     let port: u32 = 8080;
@@ -59,5 +65,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())  // Return `Ok` to indicate that the program ran successfully.
 }
+
+
+async fn main_response_mapper(response: Response) -> Response {
+    tracing::trace!("RESPONSE: {:?}\n", response);
+
+
+    response
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // good check character: ✓

@@ -1,7 +1,7 @@
-use crate::error::{
+use crate::{error::{
     Result,  // Custom Result type. (Result<T> == std::result::Result<T, AppError>)
     AppError  // Custom error type for the application.
-};
+}, web};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 
@@ -12,6 +12,7 @@ use axum::{
     Router, 
     Json,
 };
+use tower_cookies::{Cookies, Cookie};
 
 
 pub fn routes() -> Router {
@@ -21,19 +22,35 @@ pub fn routes() -> Router {
 
 
 async fn api_login(
+    cookies: Cookies,  // Cookies are automatically parsed from the request.
     payload: Json<LoginPayload>
 ) -> Result<Json<Value>> {
     tracing::info!("API LOGIN:\n{:#?}", payload);
 
-    if payload.username == "admin" && payload.password == "etesech" {
-        Ok(Json(json!({  // Return a JSON response.
-            "result": {
-                "success": true,
-            }
-        })))
-    } else {
-        Err(AppError::LoginFail)
+    match (payload.username.as_str(), payload.password.as_str()) {
+        ("admin", "etesech") => {  // If the username and password are correct...
+            // todo: Implement a real authentication system
+            // how:
+            // 1. Generate a random token.
+            // 2. Store the token in a database.
+            // 3. Send the token to the client.
+            // 4. When the client sends a request, check if the token is valid.
+            // 5. If the token is valid, allow the request.
+            // 6. If the token is invalid, deny the request.
+            // 7. Periodically delete expired/ unused tokens from the database.
+            cookies.add(Cookie::new(web::COOKIE_AUTH_TOKEN, "user-1.exp.sign"));
+            
+            Ok(Json(json!({  // Return a JSON response.
+                "result": {
+                    "success": true,
+                }
+            })))
+        },
+        _ => Err(AppError::LoginFail)
     }
+
+
+    
 }
 
 

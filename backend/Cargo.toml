@@ -25,23 +25,33 @@ categories = [
 
 
 [dependencies]
+# dev
+dev_utils = "0.*"  # (https://docs.rs/dev_utils/latest/dev_utils/)
+
 # tracing
 tracing = "0.*" # (https://docs.rs/tracing/latest/tracing/)
 tracing-subscriber = { version = "0.*", features = ["env-filter"] } # (https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)
-# dev
-dev_utils = "0.*"  # (https://docs.rs/dev_utils/latest/dev_utils/)
-# web
-axum = "0.*"  # (https://docs.rs/axum/latest/axum/)
-tokio = { version = "1.*", features = ["full"] }  # (https://docs.rs/tokio/latest/tokio/) (tokio allows to use the async/await syntax)
-hyper = { version = "*", features = ["full"] }  # (https://docs.rs/hyper/latest/hyper/) (hyper allows to use the http client)
-tower-http = { version = "0.5", features = ["fs"] }  # (https://docs.rs/tower-http/latest/tower_http/)
-tower = "0.*" # (https://docs.rs/tower/latest/tower/)
-# # sql
-# sqlx = { version = "0.*", features = ["runtime-tokio-rustls", "macros"] } # (https://docs.rs/sqlx/latest/sqlx/)
-# # json
+
+# serialization
 serde = { version = "1.*", features = ["derive"] }  # (https://docs.rs/serde/latest/serde/)
 serde_json = "1.*"  # (https://docs.rs/serde_json/latest/serde_json/)
 serde_with = "*"  # (https://docs.rs/serde_with/latest/serde_with/)
+
+# async runtime
+tokio = { version = "1.*", features = ["full"] }  # (https://docs.rs/tokio/latest/tokio/) (tokio allows to use the async/await syntax)
+
+# web
+axum = "0.*"  # (https://docs.rs/axum/latest/axum/)
+# hyper = { version = "*", features = ["full"] }  # (https://docs.rs/hyper/latest/hyper/) (hyper allows to use the http client)
+
+# middleware (a middleware is a function that wraps a service and returns a new service)
+tower = "0.*" # (https://docs.rs/tower/latest/tower/)
+tower-http = { version = "0.5", features = ["fs"] }  # (https://docs.rs/tower-http/latest/tower_http/)
+tower-cookies = "0.*"  # (https://docs.rs/tower-cookie/latest/tower_cookie/)
+
+# sql
+sqlx = { version = "0.*",  features = ["postgres", "runtime-tokio-native-tls", "macros"] } # (https://docs.rs/sqlx/latest/sqlx/)
+
 
 [features]
 default = []  # no features by default
